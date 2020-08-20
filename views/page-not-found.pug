@@ -1,4 +1,12 @@
 extends layout.pug
 
 block content 
-  h1 test page not found
+  head
+    title Page Not Found
+    link(rel='stylesheet', href='/static/stylesheets/style.css')
+  body
+    h1 Page Not Found
+    p Sorry! We couldn't find the page you were looking for.
+    br
+    p
+      a.button(href='/books') Home

@@ -1,4 +1,10 @@
 extends layout.pug
 
 block content 
-  h1 test error
+  head
+    title Page Not Found
+    link(rel='stylesheet', href='/static/stylesheets/style.css')
+  body
+    h1= message
+    p= status
+    pre #{error.stack}
