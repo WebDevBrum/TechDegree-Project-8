@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 //const router = express.Router();
+
 const db = require("./db");
 const { Book } = db.models;
+const { Op } = db.Sequelize;
 
 const app = express();
 
@@ -37,8 +39,18 @@ app.get(
 app.get(
   "/books",
   asyncHandler(async (req, res) => {
-    const books = await Book.findAll();
-    res.render("index", { books: books, title: "Library Manager" });
+    let page = 0;
+    let page_size = 5;
+    const offset = page * page_size;
+    const { count, rows } = await Book.findAndCountAll({
+      where: { id: { [Op.gte]: 0 } },
+      offset: offset,
+      limit: page_size,
+    });
+    console.log(count);
+    let numberOfPages = count / page_size;
+    console.log(numberOfPages);
+    res.render("index", { books: rows, title: "Library Manager" });
   })
 );
 
@@ -54,8 +66,20 @@ app.get(
 app.post(
   "/books/new",
   asyncHandler(async (req, res) => {
-    const books = await Book.create(req.body);
-    res.redirect("/books/");
+    let books;
+    try {
+      books = await Book.create(req.body);
+      res.redirect("/books/");
+    } catch (error) {
+      if (error.name === "SequelizeValidationError") {
+        books = await Book.build(req.body);
+        console.log(error.errors);
+        res.render("new-book", { books: {}, errors: error.errors });
+        console.log(books);
+      } else {
+        throw error;
+      }
+    }
   })
 );
 
@@ -79,7 +103,6 @@ app.post(
   "/books/:id",
   asyncHandler(async (req, res) => {
     const books = await Book.findByPk(req.params.id);
-    console.log(books.title);
 
     await books.update(req.body);
     console.log(req.body);

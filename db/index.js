@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'library.db',
-  logging: false
+  dialect: "sqlite",
+  storage: "library.db",
+  logging: false,
 });
 
 const db = {
@@ -12,6 +12,6 @@ const db = {
   models: {},
 };
 
-db.models.Book = require('./models/book.js')(sequelize);
+db.models.Book = require("./models/book.js")(sequelize);
 
 module.exports = db;
