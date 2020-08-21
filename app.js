@@ -62,10 +62,15 @@ app.post(
 /* Shows book detail form*/
 app.get(
   "/books/:id",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const books = await Book.findByPk(req.params.id);
-
-    res.render("update-book", { books: books });
+    if (books) {
+      res.render("update-book", { books: books });
+    } else {
+      const err = new Error();
+      err.status = 500;
+      next(err);
+    }
   })
 );
 
@@ -91,6 +96,25 @@ app.post(
     res.redirect("/books/");
   })
 );
+
+app.use((req, res, next) => {
+  console.log("404 error handler called");
+
+  res.status(404).render("page-not-found");
+});
+
+app.use((err, req, res, next) => {
+  if (err) {
+    console.log("Global error handler called", err);
+  }
+  if (err.status === 404) {
+    res.status(404).render("page-not-found", { err });
+  } else {
+    err.message =
+      "It looks like something went wrong or the book you are looking for does not exist";
+    res.status(err.status || 500).render("error", { err });
+  }
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("listening on port 3000");

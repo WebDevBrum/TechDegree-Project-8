@@ -5,6 +5,9 @@ block content
     title Page Not Found
     link(rel='stylesheet', href='/static/stylesheets/style.css')
   body
-    h1= message
-    p= status
-    pre #{error.stack}
+    p
+      a.button(href='/books') Home
+    h1= err.message
+    h2= err.status + " error"
+    pre #{err.stack}
+    
