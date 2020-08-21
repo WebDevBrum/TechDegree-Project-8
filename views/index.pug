@@ -8,6 +8,7 @@ block content
     h1 Welcome to Lulworth Library
       p
         a.button(href='/books/new') Create New Book
+        
       table
         thead
           tr
@@ -24,3 +25,9 @@ block content
             td= book.author
             td= book.genre
             td= book.year
+      - var n = 0;
+    ul.pages
+      while n < pages
+        li
+          p
+            a(href=`/books/page/${n++}` class="button") #{n}

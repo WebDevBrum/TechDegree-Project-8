@@ -31,26 +31,35 @@ function asyncHandler(cb) {
 app.get(
   "/",
   asyncHandler(async (req, res) => {
-    res.redirect("/books"); //think i need to set up view templates first and then delete these res.sends, also have console.log for library items
+    res.redirect("/books/page/0"); //think i need to set up view templates first and then delete these res.sends, also have console.log for library items
   })
 );
 
 /*Shows the full list of books */
 app.get(
-  "/books",
+  "/books/page/:id",
   asyncHandler(async (req, res) => {
-    let page = 0;
+    let page = req.params.id;
     let page_size = 5;
     const offset = page * page_size;
     const { count, rows } = await Book.findAndCountAll({
       where: { id: { [Op.gte]: 0 } },
       offset: offset,
       limit: page_size,
+      order: [
+        ["author", "ASC"],
+        ["title", "ASC"],
+      ],
     });
-    console.log(count);
+
     let numberOfPages = count / page_size;
-    console.log(numberOfPages);
-    res.render("index", { books: rows, title: "Library Manager" });
+
+    res.render("index", {
+      books: rows,
+      title: "Library Manager",
+      pages: numberOfPages,
+      currentPage: page,
+    });
   })
 );
 
@@ -69,7 +78,7 @@ app.post(
     let books;
     try {
       books = await Book.create(req.body);
-      res.redirect("/books/");
+      res.redirect("/");
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
         books = await Book.build(req.body);
@@ -116,7 +125,7 @@ app.post(
   asyncHandler(async (req, res) => {
     const books = await Book.findByPk(req.params.id);
     await books.destroy();
-    res.redirect("/books/");
+    res.redirect("/");
   })
 );
 
