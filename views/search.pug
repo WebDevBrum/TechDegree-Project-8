@@ -5,7 +5,7 @@ block content
       title Books
       link(rel='stylesheet' ,href='/static/stylesheets/style.css')
   body 
-    h1 Welcome to Lulworth Library
+    h1 Search results for #{searchquery}
       - var n = 1;
       - var query = "cheese";
       div.search
@@ -36,4 +36,6 @@ block content
       while n < pages
         li
           p
-            a(href=`/books/page/${n+=1}` class="button") #{n}
+            a(href=`/books/page/${n+=1}/?searchquery=${searchquery}` class="button") #{n}
+    p
+        a.button(href='/') Back to Homepage      

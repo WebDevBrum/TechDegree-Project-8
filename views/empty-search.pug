@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+  head
+      title Boo
+      link(rel='stylesheet' ,href='/static/stylesheets/style.css')
+  body 
+    h1 Search results for 
+      - var n = 1;
+      - var query = "cheese";
+      div.search
+        form(method="get" action=`/books/page/1`)
+          input(name="searchquery", type="text") 
+          input(type="submit" value="Search Books")
+          a.button(href='/books/new') Create New Book
+    h2 Sorry no matching books found
