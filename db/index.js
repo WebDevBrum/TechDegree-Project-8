@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 
+/* -- Allows the use of sequelize to make SQL database requests --- */
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "library.db",
