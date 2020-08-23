@@ -25,15 +25,16 @@ function asyncHandler(cb) {
   };
 }
 
+function errorPush(status, next) {
+  const err = new Error();
+  err.status = status;
+  next(err);
+}
+
 async function libraryIndex(page, res, next) {
-  let page_size = 5;
+  let page_size = 8;
   const offset = page * page_size;
 
-  // if (isNaN(offset)) {
-  //   const err = new Error();
-  //   err.status = 500;
-  //   next(err);
-  // }
   const { count, rows } = await Book.findAndCountAll({
     where: { id: { [Op.gte]: 0 } },
     offset: offset,
@@ -53,18 +54,12 @@ async function libraryIndex(page, res, next) {
       currentPage: page,
     });
   } else {
-    console.log("error index");
-    console.log(page);
-    console.log(numberOfPages);
-    const err = new Error();
-    console.log(err);
-    err.status = 500;
-    next(err);
+    errorPush(500, next);
   }
 }
 
 async function search(page, query, res, next) {
-  let page_size = 5;
+  let page_size = 8;
   const offset = page * page_size;
 
   const { count, rows } = await Book.findAndCountAll({
@@ -91,7 +86,7 @@ async function search(page, query, res, next) {
       ["title", "ASC"],
     ],
   });
-  console.log(count);
+
   if (count === 0) {
     res.render("empty-search");
   } else {
@@ -106,13 +101,7 @@ async function search(page, query, res, next) {
         searchquery: query,
       });
     } else {
-      console.log("error search");
-      console.log(page);
-      console.log(numberOfPages);
-      const err = new Error();
-      console.log(err);
-      err.status = 500;
-      next(err);
+      errorPush(500, next);
     }
   }
 }
@@ -134,7 +123,6 @@ app.get(
     let page = req.params.id - 1;
     let query = req.query.searchquery;
 
-    console.log(!isNaN(page));
     if (!isNaN(page)) {
       if (query === undefined || query === " ") {
         await libraryIndex(page, res, next);
@@ -142,9 +130,7 @@ app.get(
         await search(page, query, res, next);
       }
     } else {
-      const err = new Error();
-      err.status = 500;
-      next(err);
+      errorPush(500, next);
     }
   })
 );
@@ -168,9 +154,8 @@ app.post(
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
         books = await Book.build(req.body);
-        console.log(error.errors);
+
         res.render("new-book", { books: {}, errors: error.errors });
-        console.log(books);
       } else {
         throw error;
       }
@@ -186,9 +171,7 @@ app.get(
     if (books) {
       res.render("update-book", { books: books });
     } else {
-      const err = new Error();
-      err.status = 500;
-      next(err);
+      errorPush(500, next);
     }
   })
 );
@@ -197,11 +180,14 @@ app.get(
 app.post(
   "/books/:id",
   asyncHandler(async (req, res) => {
-    const books = await Book.findByPk(req.params.id);
-
-    await books.update(req.body);
-    console.log(req.body);
-    res.redirect("/books/page/1");
+    let books;
+    try {
+      books = await Book.findByPk(req.params.id);
+      await books.update(req.body);
+      res.redirect("/books/page/1");
+    } catch (error) {
+      res.render("update-book", { books: books, errors: error.errors });
+    }
   })
 );
 

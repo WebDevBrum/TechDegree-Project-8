@@ -6,19 +6,24 @@ block content
     link(rel='stylesheet', href='/static/stylesheets/style.css')
   body
     h1 Update Book
+    if errors
+      h2.error Oooops!
+          ul.error
+          each error in errors
+            li= error.message
     form(action=`/books/${books.id}`, method="post")
       p
         label(for='title') Title
-        input(name='title', type='text', value=`${books.title}`)
+        input(name='title', id='title', type='text', value=`${books.title}`)
       p
         label(for='author') Author
-        input(name='author', type='text', value=`${books.author}`)
+        input(name='author', id='author' type='text', value=`${books.author}`)
       p
         label(for='genre') Genre
-        input(name='genre', type='text', value=`${books.genre}`)
+        input(name='genre', id='genre', type='text', value=`${books.genre}`)
       p
         label(for='year') Year
-        input(name='year', type='text', value=`${books.year}`)
+        input(name='year', id='year', type='text', value=`${books.year}`)
       p
         input(type='submit', value='Update Book')
     form(method='post', action=`/books/${books.id}/delete`, onsubmit="return confirm('Do you really want to delete this book?');")
