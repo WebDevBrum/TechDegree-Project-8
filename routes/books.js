@@ -89,7 +89,7 @@ async function search(page, query, res, next) {
   });
 
   if (count === 0) {
-    res.render("empty-search");
+    res.render("empty-search", {searchquery: query});
   } else {
     let numberOfPages = count / page_size;
 
