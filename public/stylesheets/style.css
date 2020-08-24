@@ -201,4 +201,14 @@ body.nothing {
     margin-left: 20px;
     background-color: red;
   }
+
+  div.search form a.button,
+  input[type="submit"] {
+    margin-left: 140px;
+    transition: 0.4s;
+  }
+
+  div.search input[type="submit"] {
+    border: 0;
+  }
 }
