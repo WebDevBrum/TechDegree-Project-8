@@ -135,14 +135,20 @@ ul.pages li {
 }
 
 div.search input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   margin-left: 20px;
 }
 
 div.search input[type="text"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   margin-left: 0px;
 }
 
 div.search a.button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   margin-left: 20px;
   background-color: red;
 }
