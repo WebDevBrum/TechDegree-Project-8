@@ -180,4 +180,25 @@ body.nothing {
     margin-left: 0px;
     width: 180px;
   }
+
+  div.search a.button {
+    margin-left: 20px;
+    background-color: red;
+  }
+
+  div.search a.button,
+  input[type="submit"] {
+    color: white;
+    background: #016198;
+    font-family: "Cormorant Garamond", serif;
+    padding: 10px 14px 12px;
+    font-size: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  div.search a.button {
+    margin-left: 20px;
+    background-color: red;
+  }
 }
