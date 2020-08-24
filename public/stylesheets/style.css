@@ -147,24 +147,24 @@ body.index {
   background-image: url("/static/images/stack2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: auto;
-  padding-bottom: 200px;
+  min-height: 100vh;
+  padding-bottom: 0px;
 }
 
 body.search {
   background-image: url("/static/images/stack2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
-  padding-bottom: 350px;
+  min-height: 100vh;
+  padding-bottom: 0px;
 }
 
 body.nothing {
   background-image: url("/static/images/nothing.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
-  padding-bottom: 600px;
+  height: 100vh;
+  padding-bottom: 0px;
 }
 
 /* Portrait */
