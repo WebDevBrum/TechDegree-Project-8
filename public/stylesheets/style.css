@@ -161,6 +161,15 @@ body.nothing {
 
 /* Portrait */
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: portrait) {
+  input[type="submit"] {
+    color: white;
+    background: #016198;
+    font-family: "Cormorant Garamond", serif;
+    padding: 10px 14px 12px;
+    font-size: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
   body.index {
     padding-left: 0px;
     padding-right: 0px;
@@ -174,6 +183,10 @@ body.nothing {
   body.nothing {
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  div.search input[type="submit"] {
+    margin-left: 20px;
   }
 
   div.search input[type="text"] {
