@@ -24,6 +24,8 @@ a:hover {
 
 a.button,
 input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   color: white;
   background: #016198;
   font-family: "Cormorant Garamond", serif;
@@ -35,16 +37,22 @@ input[type="submit"] {
 
 form a.button,
 input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   margin-left: 140px;
   transition: 0.4s;
 }
 
 input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   border: 0;
 }
 
 a.button:hover,
 input[type="submit"]:hover {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-color: #57a2d4;
 }
 
@@ -161,15 +169,6 @@ body.nothing {
 
 /* Portrait */
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: portrait) {
-  input[type="submit"] {
-    color: white;
-    background: #016198;
-    font-family: "Cormorant Garamond", serif;
-    padding: 10px 14px 12px;
-    font-size: 14px;
-    border-radius: 2px;
-    cursor: pointer;
-  }
   body.index {
     padding-left: 0px;
     padding-right: 0px;
