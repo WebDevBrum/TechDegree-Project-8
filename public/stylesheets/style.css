@@ -186,7 +186,7 @@ body.nothing {
     background-color: red;
   }
 
-  div.search a.button,
+  div.search form a.button,
   input[type="submit"] {
     color: white;
     background: #016198;
