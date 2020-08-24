@@ -202,11 +202,4 @@ body.nothing {
     margin-left: 0px;
     width: 180px;
   }
-
-  div.search a.button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin-left: 20px;
-    background-color: red;
-  }
 }
