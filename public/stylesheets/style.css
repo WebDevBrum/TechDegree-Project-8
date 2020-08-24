@@ -160,7 +160,7 @@ body.nothing {
 }
 
 /* Portrait */
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (orientation: portrait) {
   body.index {
     padding-left: 0px;
     padding-right: 0px;
@@ -179,22 +179,6 @@ body.nothing {
   div.search input[type="text"] {
     margin-left: 0px;
     width: 180px;
-  }
-
-  div.search a.button {
-    margin-left: 20px;
-    background-color: red;
-  }
-
-  div.search form a.button,
-  input[type="submit"] {
-    color: white;
-    background: #016198;
-    font-family: "Cormorant Garamond", serif;
-    padding: 10px 14px 12px;
-    font-size: 14px;
-    border-radius: 2px;
-    cursor: pointer;
   }
 
   div.search a.button {
