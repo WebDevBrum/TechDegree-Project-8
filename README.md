@@ -6,6 +6,10 @@
 
 <img src='readme-images/front.jpeg' width='350' height='200' alt='project preview'/>
 
+## Live Demo
+
+https://lulworth-library.herokuapp.com/books/page/1
+
 ## Getting Started
 
 To get up and running with this project, run the following commands from the root of the folder that contains this README file.
